@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Post Deleter</title>
+    </head>
+    <body>
+        <div>
+            <h1>Post Deleter</h1>
+                <form action="DeletePost.php" method="post">
+                    <table>
+                        <tr>
+                            <th>Author</th>
+                            <th>Content</th>
+                            <th>Delete</th>
+                        </tr>
+                        <?php
+                            $mysqli = new mysqli("mysql.eecs.ku.edu", "j470k652", "ahc4Eo4r", "j470k652");
+                            $query = "SELECT * from Posts;";
+                            $result = $mysqli->query($query);
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                    echo "<td>{$row['author_id']}</td>";
+                                    echo "<td>{$row['content']}</td>";
+                                    echo '<td><input type="checkbox" name="Posts[]" value="'.$row['post_id'].'"></input></td>';
+                                echo "</tr>";
+                            }
+                            $mysqli->close();
+                        ?>
+                    </table>
+                    <p><input type="submit"></p>
+                </form>
+        </div>
+    </body>
+</html>
